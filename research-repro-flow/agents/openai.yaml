@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Repro Flow"
+  short_description: "Research, shortlist, and reproduce baselines"
+  default_prompt: "Use $research-repro-flow to turn my ML research goal into a shortlist, code check, environment setup, data download, and reproduction plan."
