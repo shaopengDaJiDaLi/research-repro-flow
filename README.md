@@ -1,41 +1,31 @@
+<div align="center">
+
 # Research Repro Flow
 
-`research-repro-flow` is a Codex skill for research-to-reproduction workflows.
+Research, shortlist, and reproduce machine learning baselines with Codex.
 
-It helps turn an ML task into a practical baseline pipeline:
+[![Codex Skill](https://img.shields.io/badge/Codex-skill-111827)](research-repro-flow/SKILL.md)
+[![Workflow](https://img.shields.io/badge/workflow-research%20to%20repro-2563eb)](research-repro-flow/references/workflow.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-1. search recent methods
-2. shortlist baseline candidates
-3. pick one or more defaults
-4. check open-source code
-5. set up conda
-6. download data
-7. run a smoke train/eval
+</div>
 
-## When to use
+`research-repro-flow` is a Codex skill for turning an ML research goal into a practical reproduction path. It helps an agent search recent methods, shortlist credible baselines, inspect open-source code, set up the environment, obtain data, and run a smoke train/eval when possible.
 
-Use this skill when you want to:
+## Why Use It
 
-- compare recent baselines for a specific ML task
-- ask for a shortlist table and recommendation
-- verify whether code is open source
-- reproduce a paper or benchmark with conda
-- automate dataset download when possible
+Research reproduction usually fails in the gaps between "this paper looks good" and "this command runs." This skill makes those gaps explicit:
 
-## Recommended name
+- shortlist recent baselines with repo and dataset coverage
+- prefer official or benchmark-maintained implementations
+- choose one default baseline plus a small number of alternates
+- separate research completion from execution blockers
+- stop cleanly when data requires login, payment, or manual approval
+- record the commands, artifacts, and metrics needed for a reproducible handoff
 
-`research-repro-flow`
+## Quick Start
 
-Why this name:
-
-- short
-- action-oriented
-- describes the exact workflow
-- easy to trigger with `$research-repro-flow`
-
-## Install
-
-If you publish this repo on GitHub, install the skill from the `research-repro-flow/` subdirectory:
+Install the skill from this repository's `research-repro-flow/` directory:
 
 ```bash
 python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
@@ -54,32 +44,65 @@ Restart Codex after installing so the new skill is visible.
 
 ## Usage
 
-Trigger it directly in Codex:
+Trigger the skill directly in Codex:
 
 ```text
 $research-repro-flow
 ```
 
-Example prompt:
+Example prompts:
 
 ```text
 $research-repro-flow Find the best reproducible baselines for gait recognition, then help me reproduce one of them.
 ```
 
-## Repo layout
+```text
+$research-repro-flow Compare recent open-source baselines for remote sensing change detection and recommend one to run first.
+```
 
 ```text
-repo-root/
+$research-repro-flow Reproduce the strongest practical baseline for my dataset if public code and data are available.
+```
+
+## Workflow
+
+1. Identify the task family, benchmark, and user constraints.
+2. Search recent papers, official repositories, and benchmark repositories.
+3. Build a compact shortlist with method, year, venue, code status, datasets, and reproducibility notes.
+4. Recommend one default baseline and, when useful, one or two alternates.
+5. Set up a minimal conda environment from the selected repository's instructions.
+6. Download public data automatically when allowed.
+7. Run the shortest credible smoke train/eval command.
+8. Report commands, artifacts, metrics, blockers, and the next action.
+
+## Output Shape
+
+The skill is designed to produce small, decision-ready outputs instead of broad literature surveys:
+
+| Rank | Method | Year | Venue | Open source | Repo | Datasets | Why it matters |
+|---|---|---:|---|---|---|---|---|
+| 1 | Default baseline | 2026 | Example | Official | Link | Target benchmark | Strong, runnable first choice |
+| 2 | Alternate | 2025 | Example | Community | Link | Related benchmark | Useful fallback or comparison |
+
+## Repository Layout
+
+```text
+.
 ├── README.md
+├── RELEASE.md
 ├── LICENSE
 └── research-repro-flow/
     ├── SKILL.md
-    ├── agents/openai.yaml
-    └── references/workflow.md
+    ├── agents/
+    │   └── openai.yaml
+    └── references/
+        └── workflow.md
 ```
 
-## Notes
+## Project Status
 
-- The skill body is intentionally short.
-- The workflow details live in `research-repro-flow/references/workflow.md`.
-- The skill is designed for research tasks that end in baseline selection and reproduction.
+This is a lightweight Codex skill rather than a Python package. The core behavior lives in [`research-repro-flow/SKILL.md`](research-repro-flow/SKILL.md), with the operational checklist in [`research-repro-flow/references/workflow.md`](research-repro-flow/references/workflow.md).
+
+## License
+
+Released under the [MIT License](LICENSE).
