@@ -1,4 +1,4 @@
 interface:
   display_name: "Research Repro Flow"
-  short_description: "Interactive ML method survey and reproduction"
-  default_prompt: "Use $research-repro-flow to survey recent methods for my ML task, recommend popular/accurate/fast choices, wait for my selection, then check code, set up data and environment, and produce train/test scripts."
+  short_description: "Clarify, survey, choose, then reproduce"
+  default_prompt: "Use $research-repro-flow to clarify my ML task scope, survey recent methods, recommend popular/accurate/fast choices, wait for my selection, then set up data, environment, and train/test scripts."
